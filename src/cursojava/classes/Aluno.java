@@ -57,8 +57,11 @@ public class Aluno extends Pessoa {
 	public double getMediaNota() {
 
 		double somaNotas = 0.0;
+		
 		for (Disciplina disciplina : disciplinas) {
-			somaNotas += disciplina.getNota();
+			
+			somaNotas+= disciplina.getMediaNota();
+			
 		}
 
 		return somaNotas / disciplinas.size();
@@ -67,8 +70,8 @@ public class Aluno extends Pessoa {
 
 	public String getAlunoAprovado() {
 		double media = this.getMediaNota();
-		if (media >= 50) {
-			if (media >= 70) {
+		if (media >= 5) {
+			if (media >= 7) {
 				return StatusAluno.APROVADO;
 			} else {
 				return StatusAluno.RECUPERACAO;
@@ -89,5 +92,13 @@ public class Aluno extends Pessoa {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "Aluno: " +getNome()+ " [dataMatricula=" + dataMatricula + ", nomeEscola=" + nomeEscola + ", serieMatriculado="
+				+ serieMatriculado + ", disciplinas=" + disciplinas + "]";
+	}
+	
+	
 
 }

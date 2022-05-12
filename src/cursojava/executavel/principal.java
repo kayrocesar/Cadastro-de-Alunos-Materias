@@ -1,94 +1,104 @@
 package cursojava.executavel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import cursojava.classes.Aluno;
 import cursojava.classes.Disciplina;
 import cursojava.classes.Secretario;
 import cursojava.classesauxiliares.FuncaoAutenticacao;
-import cursojava.constantes.StatusAluno;
 import cursojava.interfaces.PermitirAcesso;
 
 public class principal {
 
 	public static void main(String[] args) {
+		try {
 
-		String login = JOptionPane.showInputDialog("Informe o login: ");
-		String senha = JOptionPane.showInputDialog("Informe a senha: ");
-		
-		
-		FuncaoAutenticacao autenticacao = new FuncaoAutenticacao();
-		
-		PermitirAcesso permitirAcesso= new Secretario(login, senha);
-		
-		
+			String login = JOptionPane.showInputDialog("Informe o login: ");
+			String senha = JOptionPane.showInputDialog("Informe a senha: ");
 
-		if (autenticacao.autenticarCursoJava(permitirAcesso)) {
+			FuncaoAutenticacao autenticacao = new FuncaoAutenticacao();
 
-			List<Aluno> alunos = new ArrayList<Aluno>();
+			PermitirAcesso permitirAcesso = new Secretario(login, senha);
 
-			List<Aluno> alunosAprovados = new ArrayList<Aluno>();
-			List<Aluno> alunosRecuperacao = new ArrayList<Aluno>();
-			List<Aluno> alunosReprovados = new ArrayList<Aluno>();
+			if (autenticacao.autenticarCursoJava(permitirAcesso)) {// autenticando
 
-			for (int qtd = 0; qtd <= 5; qtd++) {
+				List<Aluno> alunos = new ArrayList<Aluno>(); // lista de alunos
+				
+				int qtd_alunos= Integer.parseInt(JOptionPane.showInputDialog("Quantos alunos deseja cadastrar? "));
 
-				Aluno aluno1 = new Aluno();
-				aluno1.setNome(JOptionPane.showInputDialog("Digite do aluno " + (qtd + 1)));
+				for (int k = 0; k < qtd_alunos; k++) {
 
-				aluno1.setIdade(Integer.parseInt(JOptionPane.showInputDialog("Digite a sua idade: ")));
-				// aluno1.setDataNascimento(JOptionPane.showInputDialog("Digite a sua data de
-				// nascimento: "));
-				// aluno1.setDataMatricula(JOptionPane.showInputDialog("Digite a sua matricula:
-				// "));
-				// aluno1.setNomeMae(JOptionPane.showInputDialog("Digite o nome da sua mãe: "));
-				// aluno1.setNomePai(JOptionPane.showInputDialog("Digite o nome do seu pai: "));
-				// aluno1.setNumeroCpf(JOptionPane.showInputDialog("Digite o CPF: "));
-				// aluno1.setNomeEscola(JOptionPane.showInputDialog("Digite o nome da escola:
-				// "));
+					Aluno aluno1 = new Aluno();
+					aluno1.setNome(JOptionPane.showInputDialog("Digite do aluno " + (k + 1)));
 
-				for (int pos = 1; pos <= 4; pos++) {
-					String nomeDisciplina = JOptionPane.showInputDialog("Insira o nome da disciplina " + pos + ":");
-					String notaDisciplina = JOptionPane.showInputDialog("Insira o nota da disciplina: " + pos + ":");
-					Disciplina disciplina = new Disciplina();
-					disciplina.setDisciplina(nomeDisciplina);
-					disciplina.setNota(Double.parseDouble(notaDisciplina));
-					aluno1.getDisciplinas().add(disciplina);
+					aluno1.setIdade(Integer.parseInt(JOptionPane.showInputDialog("Digite a sua idade: ")));
+					aluno1.setDataNascimento(JOptionPane.showInputDialog("Digite a sua data de nascimento: "));
+					aluno1.setDataMatricula(JOptionPane.showInputDialog("Digite a sua matricula: "));
+					aluno1.setNomeMae(JOptionPane.showInputDialog("Digite o nome da sua mãe: "));
+					aluno1.setNomePai(JOptionPane.showInputDialog("Digite o nome do seu pai: "));
+					aluno1.setNumeroCpf(JOptionPane.showInputDialog("Digite o CPF: "));
+					aluno1.setNomeEscola(JOptionPane.showInputDialog("Digite o nome da escola: "));
+
+					// inserindo 4 disciplinas para cada aluno
+					for (int pos = 1; pos <= 4; pos++) {
+						String nomeDisciplina = JOptionPane.showInputDialog("Insira o nome da disciplina " + pos + ":");
+						Disciplina disciplina = new Disciplina();
+						disciplina.setDisciplina(nomeDisciplina);
+						Double notas[] = new Double[4]; 
+						
+                        //Inserindo 4 notas para cada disciplina
+						for (int i = 0; i < disciplina.getNota().length; i++) {
+
+							notas[i] = Double.parseDouble(JOptionPane.showInputDialog(
+									"Insira a nota " + (i+1) + " de " + disciplina.getDisciplina() + " :"));
+
+						}
+						disciplina.setNota(notas);// inserindo lista de notas na disciplina em questão
+						
+						aluno1.getDisciplinas().add(disciplina); // adicionando disciplina na lista de disciplinas do
+																	// aluno
+					}
+					alunos.add(aluno1); // adicionando aluno na lista de alunos
 				}
-				alunos.add(aluno1);
-			}
 
-			for (Aluno aluno : alunos) { // separando em listas
-				if (aluno.getAlunoAprovado().equalsIgnoreCase(StatusAluno.APROVADO)) {
-					alunosAprovados.add(aluno);
-				} else if (aluno.getAlunoAprovado().equalsIgnoreCase(StatusAluno.REPROVADO)) {
-					alunosReprovados.add(aluno);
-				} else {
-					alunosRecuperacao.add(aluno);
+				System.out.println("------------Lista de alunos--------------------");//imprimindo lista de alunos
+				for (Aluno aluno : alunos) {
+					
+					System.out.println("Aluno: " + aluno.getNome());
+					System.out.println("------------Lista de disciplinas--------------------"); //imprimindo disciplinas de cada aluno
+					for (Disciplina disc : aluno.getDisciplinas()) {
+						System.out.println("Disciplina: " +disc.getDisciplina()+ " Média: " +disc.getMediaNota()+
+								" Maior nota: " + disc.maiorNota() + " Menor nota: " +disc.menorNota()+ " Status: " +disc.StatusMateria());
+					}
+					
 				}
+
 			}
 
-			System.out.println("------------lista de alunosde aprovados------------");
-			for (Aluno aluno : alunosAprovados) {
-				System.out.println("O aluno " + aluno.getNome() + "está " + aluno.getAlunoAprovado());
+			else {
+				JOptionPane.showInternalMessageDialog(null, "Login e/ou senha incorreto! ");
 			}
 
-			System.out.println("------------lista de alunos de reprovados------------");
-			for (Aluno aluno : alunosReprovados) {
-				System.out.println("O aluno " + aluno.getNome() + "está " + aluno.getAlunoAprovado());
+		} catch (NumberFormatException e) {
+
+			StringBuilder saida = new StringBuilder();
+			e.printStackTrace(); // imprime erro no console Java
+
+			System.out.println("Mensagem: " + e.getMessage());
+
+			for (int i = 0; i < e.getStackTrace().length; i++) {
+				saida.append("\n Classe de erro: " + e.getStackTrace()[i].getClassName());
+				saida.append("\n Classe de erro: " + e.getStackTrace()[i].getClassName());
+
 			}
 
-			System.out.println("------------lista de alunos em recuperação-----------");
-			for (Aluno aluno : alunosRecuperacao) {
-				System.out.println("O aluno " + aluno.getNome() + " está em " + aluno.getAlunoAprovado());
-			}
+		} catch (NullPointerException e) {
 
-		}
-
-		else {
-			JOptionPane.showInternalMessageDialog(null, "Login e/ou senha incorreto! ");
+		} catch (Exception e) { // captura todas as exceçoes nao previstas
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getClass().getName());
+		} finally { // sempre é executado ocorrendo erros ou nao
+			JOptionPane.showMessageDialog(null, "Obrigado por aprender Java cmg!");
 		}
 	}
 }
