@@ -69,7 +69,7 @@ public class principal {
 																								// disciplinas de cada
 																								// aluno
 					for (Disciplina disc : aluno.getDisciplinas()) {
-						System.out.println("Disciplina: " + disc.getDisciplina() + " Media: " + disc.getMediaNota()
+						System.out.println("\nDisciplina: " + disc.getDisciplina() + " Media: " + disc.getMediaNota()
 								+ " Maior nota: " + disc.maiorNota() + " Menor nota: " + disc.menorNota() + " Status: "
 								+ disc.StatusMateria());
 					}
