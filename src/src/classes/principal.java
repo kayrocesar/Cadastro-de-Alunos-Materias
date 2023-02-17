@@ -1,30 +1,28 @@
-package cursojava.executavel;
+package src.classes;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
-import cursojava.classes.Aluno;
-import cursojava.classes.Disciplina;
-import cursojava.classes.Secretario;
-import cursojava.classesauxiliares.FuncaoAutenticacao;
-import cursojava.interfaces.PermitirAcesso;
 
 public class principal {
 
 	public static void main(String[] args) {
 		try {
 
-			String login = JOptionPane.showInputDialog("Informe o login: ");
-			String senha = JOptionPane.showInputDialog("Informe a senha: ");
+			//String login = JOptionPane.showInputDialog("Informe o login: ");
+			//String senha = JOptionPane.showInputDialog("Informe a senha: ");
 
-			FuncaoAutenticacao autenticacao = new FuncaoAutenticacao();
+			//FuncaoAutenticacao autenticacao = new FuncaoAutenticacao();
 
-			PermitirAcesso permitirAcesso = new Secretario(login, senha);
 
-			if (autenticacao.autenticarCursoJava(permitirAcesso)) {// autenticando
+			//PermitirAcesso permitirAcesso = new Secretario(login, senha);
+
+			//if (autenticacao.autenticarCursoJava(permitirAcesso)) {// autenticando
 
 				List<Aluno> alunos = new ArrayList<Aluno>(); // lista de alunos
-				
-				int qtd_alunos= Integer.parseInt(JOptionPane.showInputDialog("Quantos alunos deseja cadastrar? "));
+
+				int qtd_alunos = Integer.parseInt(JOptionPane.showInputDialog("Quantos alunos deseja cadastrar? "));
 
 				for (int k = 0; k < qtd_alunos; k++) {
 
@@ -34,50 +32,52 @@ public class principal {
 					aluno1.setIdade(Integer.parseInt(JOptionPane.showInputDialog("Digite a sua idade: ")));
 					aluno1.setDataNascimento(JOptionPane.showInputDialog("Digite a sua data de nascimento: "));
 					aluno1.setDataMatricula(JOptionPane.showInputDialog("Digite a sua matricula: "));
-					aluno1.setNomeMae(JOptionPane.showInputDialog("Digite o nome da sua mãe: "));
+					aluno1.setNomeMae(JOptionPane.showInputDialog("Digite o nome da sua mae: "));
 					aluno1.setNomePai(JOptionPane.showInputDialog("Digite o nome do seu pai: "));
 					aluno1.setNumeroCpf(JOptionPane.showInputDialog("Digite o CPF: "));
 					aluno1.setNomeEscola(JOptionPane.showInputDialog("Digite o nome da escola: "));
 
-					// inserindo 4 disciplinas para cada aluno
-					for (int pos = 1; pos <= 4; pos++) {
+					// inserindo n disciplinas para cada aluno
+					for (int pos = 1; pos <= 1; pos++) {
+						
 						String nomeDisciplina = JOptionPane.showInputDialog("Insira o nome da disciplina " + pos + ":");
 						Disciplina disciplina = new Disciplina();
 						disciplina.setDisciplina(nomeDisciplina);
-						Double notas[] = new Double[4]; 
-						
-                        //Inserindo 4 notas para cada disciplina
+						Double notas[] = new Double[4];
+
+						// Inserindo 4 notas para cada disciplina
 						for (int i = 0; i < disciplina.getNota().length; i++) {
 
 							notas[i] = Double.parseDouble(JOptionPane.showInputDialog(
-									"Insira a nota " + (i+1) + " de " + disciplina.getDisciplina() + " :"));
+									"Insira a nota " + (i + 1) + " de " + disciplina.getDisciplina() + " :"));
 
 						}
-						disciplina.setNota(notas);// inserindo lista de notas na disciplina em questão
-						
+						disciplina.setNota(notas);// inserindo lista de notas na disciplina em questï¿½o
+
 						aluno1.getDisciplinas().add(disciplina); // adicionando disciplina na lista de disciplinas do
 																	// aluno
 					}
 					alunos.add(aluno1); // adicionando aluno na lista de alunos
-				}
+				
+				
 
-				System.out.println("------------Lista de alunos--------------------");//imprimindo lista de alunos
+				System.out.println("------------Lista de alunos--------------------");// imprimindo lista de alunos
 				for (Aluno aluno : alunos) {
-					
+
 					System.out.println("Aluno: " + aluno.getNome());
-					System.out.println("------------Lista de disciplinas--------------------"); //imprimindo disciplinas de cada aluno
+					System.out.println("------------Lista de disciplinas--------------------"); // imprimindo
+																								// disciplinas de cada
+																								// aluno
 					for (Disciplina disc : aluno.getDisciplinas()) {
-						System.out.println("Disciplina: " +disc.getDisciplina()+ " Média: " +disc.getMediaNota()+
-								" Maior nota: " + disc.maiorNota() + " Menor nota: " +disc.menorNota()+ " Status: " +disc.StatusMateria());
+						System.out.println("Disciplina: " + disc.getDisciplina() + " Media: " + disc.getMediaNota()
+								+ " Maior nota: " + disc.maiorNota() + " Menor nota: " + disc.menorNota() + " Status: "
+								+ disc.StatusMateria());
 					}
-					
+
 				}
 
 			}
 
-			else {
-				JOptionPane.showInternalMessageDialog(null, "Login e/ou senha incorreto! ");
-			}
 
 		} catch (NumberFormatException e) {
 
@@ -94,11 +94,11 @@ public class principal {
 
 		} catch (NullPointerException e) {
 
-		} catch (Exception e) { // captura todas as exceçoes nao previstas
+		} catch (Exception e) { // captura todas as excecoes nao previstas
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getClass().getName());
-		} finally { // sempre é executado ocorrendo erros ou nao
-			JOptionPane.showMessageDialog(null, "Obrigado por aprender Java cmg!");
+		} finally { // sempre e executado ocorrendo erros ou nao
+			JOptionPane.showMessageDialog(null, "Obrigado por usar o programa!");
 		}
 	}
 }
@@ -114,7 +114,7 @@ public class principal {
  * 
  * while (continuar == 0) { aluno1.getDisciplinas() .remove(Integer.parseInt(
  * JOptionPane.
- * showInputDialog("Qual disciplina você deseja remover: 1,2,3 ou 4 ?")) - 1);
+ * showInputDialog("Qual disciplina vocï¿½ deseja remover: 1,2,3 ou 4 ?")) - 1);
  * continuar = JOptionPane.showConfirmDialog(null, "Continuar a remover? ");
  * 
  * }

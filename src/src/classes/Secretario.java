@@ -1,6 +1,6 @@
-package cursojava.classes;
+package src.classes;
 
-import cursojava.interfaces.PermitirAcesso;
+
 
 public class Secretario extends Pessoa implements PermitirAcesso {
 

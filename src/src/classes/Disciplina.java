@@ -1,9 +1,7 @@
-package cursojava.classes;
+package src.classes;
 
 import java.util.Arrays;
 import java.util.Objects;
-
-import cursojava.constantes.StatusAluno;
 
 public class Disciplina {
 

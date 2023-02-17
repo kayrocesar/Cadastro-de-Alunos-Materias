@@ -1,6 +1,6 @@
-package cursojava.classesauxiliares;
+package src.classes;
 
-import cursojava.interfaces.PermitirAcesso;
+
 
 // Realmente e somente receber alguem que tem o contrato da interface de permitir
 // acesso

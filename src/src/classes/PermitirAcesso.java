@@ -1,4 +1,4 @@
-package cursojava.interfaces;
+package src.classes;
 
 //Essa interface será o nosso contrato de autenticação
 

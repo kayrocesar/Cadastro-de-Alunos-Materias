@@ -1,4 +1,4 @@
-package src.constantes;
+package src.classes;
 
 public class StatusAluno {
 	

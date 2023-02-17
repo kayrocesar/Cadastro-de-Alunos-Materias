@@ -1,4 +1,4 @@
-package cursojava.classes;
+package src.classes;
 
 // Classe Pai ou Classe master ou  superclasse
 public abstract class Pessoa {
